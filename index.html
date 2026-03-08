@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>London Escape · Alejandro &amp; Ivonne</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Guía interactiva de viaje · London Escape · Alejandro &amp; Ivonne"
+    />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS vía CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              inter: [
+                "Inter",
+                "system-ui",
+                "-apple-system",
+                "BlinkMacSystemFont",
+                "Segoe UI",
+                "sans-serif",
+              ],
+            },
+            colors: {
+              base: {
+                soft: "#f8fafc",
+              },
+              accent: {
+                dark: "#0f172a",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body
+    class="font-inter antialiased bg-slate-50 text-slate-900 overflow-hidden"
+  >
+    <!-- Pantalla de bloqueo / Hype Screen -->
+    <section
+      id="lock-screen"
+      class="fixed inset-0 flex flex-col justify-between bg-slate-50 px-6 py-8"
+    >
+      <!-- Botón secreto invisible (esquina superior derecha) -->
+      <button
+        id="secret-button"
+        type="button"
+        class="absolute right-4 top-4 h-10 w-10 opacity-0"
+        aria-hidden="true"
+      ></button>
+
+      <!-- Header pequeño -->
+      <header class="flex items-center justify-between text-xs uppercase">
+        <div class="tracking-[0.2em] text-slate-500">
+          London Escape
+        </div>
+        <div class="flex items-center gap-2 text-slate-500">
+          <span class="h-1 w-1 rounded-full bg-slate-400"></span>
+          <span>03 – 06 Abr 2026</span>
+        </div>
+      </header>
+
+      <!-- Contenido central -->
+      <div class="flex flex-1 items-center justify-center">
+        <div class="max-w-md text-center">
+          <p class="mb-4 text-xs font-medium uppercase tracking-[0.25em] text-slate-500">
+            guía en construcción
+          </p>
+          <h1 class="mb-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+            London Escape
+          </h1>
+          <p class="mb-8 text-sm text-slate-600 sm:text-base">
+            Alejandro &amp; Ivonne están a punto de despegar.
+            Contando los segundos para aterrizar en Londres.
+          </p>
+
+          <!-- Contador -->
+          <div
+            class="mx-auto flex max-w-sm flex-wrap items-stretch justify-center gap-3"
+            aria-label="Cuenta regresiva hasta el viaje"
+          >
+            <div
+              class="flex h-24 w-20 flex-col items-center justify-center rounded-2xl bg-white/90 px-3 shadow-sm ring-1 ring-slate-100"
+            >
+              <span
+                id="count-days"
+                class="text-2xl font-semibold tracking-tight text-slate-900"
+                >0</span
+              >
+              <span class="mt-1 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-slate-500">
+                días
+              </span>
+            </div>
+
+            <div
+              class="flex h-24 w-20 flex-col items-center justify-center rounded-2xl bg-white/90 px-3 shadow-sm ring-1 ring-slate-100"
+            >
+              <span
+                id="count-hours"
+                class="text-2xl font-semibold tracking-tight text-slate-900"
+                >0</span
+              >
+              <span class="mt-1 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-slate-500">
+                horas
+              </span>
+            </div>
+
+            <div
+              class="flex h-24 w-20 flex-col items-center justify-center rounded-2xl bg-white/90 px-3 shadow-sm ring-1 ring-slate-100"
+            >
+              <span
+                id="count-minutes"
+                class="text-2xl font-semibold tracking-tight text-slate-900"
+                >0</span
+              >
+              <span class="mt-1 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-slate-500">
+                minutos
+              </span>
+            </div>
+
+            <div
+              class="flex h-24 w-20 flex-col items-center justify-center rounded-2xl bg-white/90 px-3 shadow-sm ring-1 ring-slate-100"
+            >
+              <span
+                id="count-seconds"
+                class="text-2xl font-semibold tracking-tight text-slate-900"
+                >0</span
+              >
+              <span class="mt-1 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-slate-500">
+                segundos
+              </span>
+            </div>
+          </div>
+
+          <p
+            id="countdown-message"
+            class="mt-6 text-xs text-slate-500"
+          >
+            Desbloquearemos tu guía cuando llegue el momento del despegue.
+          </p>
+        </div>
+      </div>
+
+      <!-- Pie minimalista -->
+      <footer class="flex items-center justify-between text-[0.7rem] text-slate-400">
+        <span> BCN &rarr; LTN · 03/04/2026 · 09:35 </span>
+        <span class="hidden sm:inline">
+          Silencios, café y aeropuerto.
+        </span>
+      </footer>
+    </section>
+
+    <!-- Contenido principal (inicialmente oculto) -->
+    <main
+      id="trip-app"
+      class="min-h-screen bg-slate-50 text-slate-900 hidden"
+    >
+      <div class="mx-auto flex min-h-screen max-w-3xl flex-col px-5 py-8 sm:py-12">
+        <!-- Hero -->
+        <section class="mb-8 sm:mb-10">
+          <div
+            class="rounded-2xl bg-white px-5 py-6 shadow-sm ring-1 ring-slate-100 sm:px-7 sm:py-7"
+          >
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p class="text-xs font-medium uppercase tracking-[0.25em] text-slate-500">
+                  London Escape
+                </p>
+                <h2 class="mt-2 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+                  Alejandro &amp; Ivonne
+                </h2>
+              </div>
+              <div class="text-sm text-slate-600">
+                <p class="font-medium text-slate-800">
+                  03 – 06 Abril 2026
+                </p>
+                <p class="text-xs text-slate-500">
+                  3 noches · 4 días · Londres
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Grid de tarjetas -->
+        <section class="mb-8 grid gap-5 sm:mb-10">
+          <!-- Tarjeta de Vuelos -->
+          <article
+            class="rounded-2xl bg-white px-5 py-6 shadow-sm ring-1 ring-slate-100 sm:px-7"
+          >
+            <header class="mb-4 flex items-center justify-between gap-3">
+              <div>
+                <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-600">
+                  Vuelos
+                </h3>
+                <p class="mt-1 text-xs text-slate-500">
+                  Boarding pass minimal · Ida y vuelta
+                </p>
+              </div>
+              <span
+                class="rounded-full bg-slate-900 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-slate-50"
+              >
+                BCN · LTN
+              </span>
+            </header>
+
+            <div class="space-y-4">
+              <!-- Ida -->
+              <div
+                class="rounded-xl border border-slate-100 bg-slate-50/80 px-4 py-4"
+              >
+                <div class="mb-2 flex items-center justify-between text-[0.7rem] uppercase tracking-[0.2em] text-slate-500">
+                  <span>ida</span>
+                  <span>03 · 04 · 2026</span>
+                </div>
+
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-xs text-slate-500">Salida</p>
+                    <p class="text-lg font-semibold text-slate-900">
+                      BCN
+                      <span class="ml-1 text-xs font-medium text-slate-500">
+                        (09:35)
+                      </span>
+                    </p>
+                  </div>
+                  <div class="flex flex-col items-center text-slate-500">
+                    <span class="text-[0.65rem] font-medium uppercase tracking-[0.2em]">
+                      vuelo
+                    </span>
+                    <span class="mt-1 text-xs font-semibold text-slate-800">
+                      W9 5362
+                    </span>
+                    <span class="mt-2 h-px w-10 bg-slate-200"></span>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-xs text-slate-500">Llegada</p>
+                    <p class="text-lg font-semibold text-slate-900">
+                      LTN
+                      <span class="ml-1 text-xs font-medium text-slate-500">
+                        (11:00)
+                      </span>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="mt-3 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600">
+                  <p>
+                    Equipaje:
+                    <span class="font-medium text-slate-800">
+                      1 mochila (40×30×20cm) por persona
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Vuelta -->
+              <div
+                class="rounded-xl border border-slate-100 bg-slate-50/80 px-4 py-4"
+              >
+                <div class="mb-2 flex items-center justify-between text-[0.7rem] uppercase tracking-[0.2em] text-slate-500">
+                  <span>vuelta</span>
+                  <span>06 · 04 · 2026</span>
+                </div>
+
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-xs text-slate-500">Salida</p>
+                    <p class="text-lg font-semibold text-slate-900">
+                      LTN
+                      <span class="ml-1 text-xs font-medium text-slate-500">
+                        (13:00)
+                      </span>
+                    </p>
+                  </div>
+                  <div class="flex flex-col items-center text-slate-500">
+                    <span class="text-[0.65rem] font-medium uppercase tracking-[0.2em]">
+                      vuelo
+                    </span>
+                    <span class="mt-1 text-xs font-semibold text-slate-800">
+                      FR 7807
+                    </span>
+                    <span class="mt-2 h-px w-10 bg-slate-200"></span>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-xs text-slate-500">Llegada</p>
+                    <p class="text-lg font-semibold text-slate-900">
+                      BCN
+                      <span class="ml-1 text-xs font-medium text-slate-500">
+                        (16:10)
+                      </span>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="mt-3 text-xs text-slate-600">
+                  <p>
+                    Pasajeros:
+                    <span class="font-medium text-slate-800">
+                      Alejandro Guerrero Perez,
+                      Ivonne Gonzalez Vazquez
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Tarjeta de Alojamiento -->
+          <article
+            class="rounded-2xl bg-white px-5 py-6 shadow-sm ring-1 ring-slate-100 sm:px-7"
+          >
+            <header class="mb-4 flex items-center justify-between gap-3">
+              <div>
+                <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-600">
+                  Alojamiento
+                </h3>
+                <p class="mt-1 text-xs text-slate-500">
+                  Base tranquila para explorar la ciudad
+                </p>
+              </div>
+              <span
+                class="rounded-full bg-slate-900 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-slate-50"
+              >
+                3 noches
+              </span>
+            </header>
+
+            <div class="space-y-4 text-sm text-slate-700">
+              <div>
+                <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
+                  dirección
+                </p>
+                <p class="mt-1 text-slate-800">
+                  Hotel en
+                  <span class="font-medium">
+                    126 Southampton Row, Camden, Londres, WC1B 5AD
+                  </span>
+                  .
+                </p>
+              </div>
+
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div>
+                  <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
+                    check-in
+                  </p>
+                  <p class="mt-1 text-slate-800">
+                    Viernes 3 de abril
+                    <span class="text-slate-600">(desde 15:00)</span>
+                  </p>
+                </div>
+                <div>
+                  <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
+                    check-out
+                  </p>
+                  <p class="mt-1 text-slate-800">
+                    Lunes 6 de abril
+                    <span class="text-slate-600">(hasta 11:00)</span>
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
+                  habitación
+                </p>
+                <p class="mt-1 text-slate-800">
+                  Doble Estándar
+                  <span class="text-slate-600">(3 noches)</span>.
+                </p>
+              </div>
+            </div>
+          </article>
+        </section>
+        <!-- Itinerario diario como línea del tiempo -->
+        <section class="mb-10 space-y-4">
+          <header class="flex items-center justify-between">
+            <div>
+              <h3 class="text-xs font-semibold uppercase tracking-[0.25em] text-slate-600">
+                Itinerario · Línea del tiempo
+              </h3>
+              <p class="mt-1 text-xs text-slate-500">
+                Vista continua de los cuatro días, de la llegada a la despedida.
+              </p>
+            </div>
+            <span
+              class="hidden rounded-full bg-slate-900 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-slate-50 sm:inline"
+            >
+              4 días
+            </span>
+          </header>
+
+          <div class="space-y-4 border-l border-slate-200 pl-5 sm:pl-7">
+            <!-- Día 1 -->
+            <article class="relative rounded-2xl bg-white px-4 py-4 shadow-sm ring-1 ring-slate-100 sm:px-5 sm:py-5">
+              <span
+                class="absolute -left-[11px] top-5 inline-flex h-3 w-3 items-center justify-center rounded-full border-2 border-slate-50 bg-slate-900"
+              ></span>
+              <header class="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+                <div>
+                  <p class="text-[0.7rem] font-medium uppercase tracking-[0.2em] text-slate-500">
+                    Día 1 · Viernes 3
+                  </p>
+                  <p class="mt-1 text-sm font-semibold text-slate-900">
+                    Llegada &amp; primera toma de contacto
+                  </p>
+                </div>
+                <p class="text-[0.7rem] text-slate-500">
+                  BCN &rarr; LTN · Check-in hotel
+                </p>
+              </header>
+              <dl class="space-y-2 text-xs text-slate-600">
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Tarde
+                  </dt>
+                  <dd>
+                    Llegar al hotel, dejar maletas y paseo suave por
+                    <span class="text-slate-800">Russell Square / Bloomsbury</span>.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Atardecer
+                  </dt>
+                  <dd>
+                    Paseo por el Támesis (zona
+                    <span class="text-slate-800">Southbank</span>) si hay energía.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Noche
+                  </dt>
+                  <dd>
+                    Cena tranquila cerca del hotel y descanso.
+                  </dd>
+                </div>
+              </dl>
+            </article>
+
+            <!-- Día 2 -->
+            <article class="relative rounded-2xl bg-white px-4 py-4 shadow-sm ring-1 ring-slate-100 sm:px-5 sm:py-5">
+              <span
+                class="absolute -left-[11px] top-5 inline-flex h-3 w-3 items-center justify-center rounded-full border-2 border-slate-50 bg-slate-900"
+              ></span>
+              <header class="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+                <div>
+                  <p class="text-[0.7rem] font-medium uppercase tracking-[0.2em] text-slate-500">
+                    Día 2 · Sábado 4
+                  </p>
+                  <p class="mt-1 text-sm font-semibold text-slate-900">
+                    Clásicos de Londres
+                  </p>
+                </div>
+                <p class="text-[0.7rem] text-slate-500">
+                  Westminster · St James&apos;s Park · Covent Garden
+                </p>
+              </header>
+              <dl class="space-y-2 text-xs text-slate-600">
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Mañana
+                  </dt>
+                  <dd>
+                    Westminster:
+                    <span class="text-slate-800">
+                      Big Ben, Parlamento, Abadía de Westminster
+                    </span>.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Mediodía
+                  </dt>
+                  <dd>
+                    Paseo por
+                    <span class="text-slate-800">St James&apos;s Park</span> y alrededores.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Tarde
+                  </dt>
+                  <dd>
+                    Trafalgar Square y
+                    <span class="text-slate-800">Covent Garden</span> (tiendas, café).
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Noche
+                  </dt>
+                  <dd>
+                    Opcional Soho / China Town para cenar.
+                  </dd>
+                </div>
+              </dl>
+            </article>
+
+            <!-- Día 3 -->
+            <article class="relative rounded-2xl bg-white px-4 py-4 shadow-sm ring-1 ring-slate-100 sm:px-5 sm:py-5">
+              <span
+                class="absolute -left-[11px] top-5 inline-flex h-3 w-3 items-center justify-center rounded-full border-2 border-slate-50 bg-slate-900"
+              ></span>
+              <header class="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+                <div>
+                  <p class="text-[0.7rem] font-medium uppercase tracking-[0.2em] text-slate-500">
+                    Día 3 · Domingo 5
+                  </p>
+                  <p class="mt-1 text-sm font-semibold text-slate-900">
+                    Mercados &amp; barrios
+                  </p>
+                </div>
+                <p class="text-[0.7rem] text-slate-500">
+                  Camden · Regent&apos;s Canal · Notting Hill
+                </p>
+              </header>
+              <dl class="space-y-2 text-xs text-slate-600">
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Mañana
+                  </dt>
+                  <dd>
+                    <span class="text-slate-800">Camden Town</span> y sus mercados.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Mediodía
+                  </dt>
+                  <dd>
+                    Paseo por
+                    <span class="text-slate-800">Regent&apos;s Canal</span> si el tiempo acompaña.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Tarde
+                  </dt>
+                  <dd>
+                    Zona
+                    <span class="text-slate-800">Notting Hill / Portobello</span>
+                    o alternativa en función del clima.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Noche
+                  </dt>
+                  <dd>
+                    Cena tranquila y preparativos de maleta.
+                  </dd>
+                </div>
+              </dl>
+            </article>
+
+            <!-- Día 4 -->
+            <article class="relative rounded-2xl bg-white px-4 py-4 shadow-sm ring-1 ring-slate-100 sm:px-5 sm:py-5">
+              <span
+                class="absolute -left-[11px] top-5 inline-flex h-3 w-3 items-center justify-center rounded-full border-2 border-slate-50 bg-slate-900"
+              ></span>
+              <header class="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+                <div>
+                  <p class="text-[0.7rem] font-medium uppercase tracking-[0.2em] text-slate-500">
+                    Día 4 · Lunes 6
+                  </p>
+                  <p class="mt-1 text-sm font-semibold text-slate-900">
+                    Despedida &amp; aeropuerto
+                  </p>
+                </div>
+                <p class="text-[0.7rem] text-slate-500">
+                  Check-out · Traslado a LTN
+                </p>
+              </header>
+              <dl class="space-y-2 text-xs text-slate-600">
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Mañana
+                  </dt>
+                  <dd>
+                    Desayuno cerca del hotel y último paseo corto por el barrio.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Antes de salir
+                  </dt>
+                  <dd>
+                    Check-out (antes de las
+                    <span class="text-slate-800">11:00</span>) y traslado hacia
+                    <span class="text-slate-800">LTN</span>.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Vuelo
+                  </dt>
+                  <dd>
+                    Tiempo para fotos, recuerdos y planear la próxima escapada.
+                  </dd>
+                </div>
+              </dl>
+            </article>
+          </div>
+        </section>
+
+        <!-- Mapas y zonas clave -->
+        <section class="mb-10 space-y-4">
+          <header class="flex items-center justify-between">
+            <div>
+              <h3 class="text-xs font-semibold uppercase tracking-[0.25em] text-slate-600">
+                Mapas &amp; zonas clave
+              </h3>
+              <p class="mt-1 text-xs text-slate-500">
+                Referencias rápidas para orientarse sin perder el ritmo del viaje.
+              </p>
+            </div>
+          </header>
+
+          <div class="grid gap-4 sm:grid-cols-[1.1fr,0.9fr]">
+            <!-- Mapa base / enlaces -->
+            <article
+              class="flex flex-col rounded-2xl bg-white px-4 py-4 shadow-sm ring-1 ring-slate-100 sm:px-5 sm:py-5"
+            >
+              <header class="mb-3">
+                <p class="text-[0.7rem] font-medium uppercase tracking-[0.2em] text-slate-500">
+                  Mapas rápidos
+                </p>
+                <p class="mt-1 text-sm font-semibold text-slate-900">
+                  Punto base &amp; overview
+                </p>
+              </header>
+
+              <div class="space-y-3 text-xs text-slate-600">
+                <p>
+                  Usa estos accesos como “anclas” en
+                  <span class="text-slate-800">Google Maps</span>:
+                </p>
+                <!-- Mapa principal: hotel como punto base -->
+                <div class="mt-2 overflow-hidden rounded-xl border border-slate-100">
+                  <div class="aspect-[4/3]">
+                    <iframe
+                      class="h-full w-full border-0"
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"
+                      allowfullscreen
+                      src="https://www.google.com/maps?q=126%20Southampton%20Row%20London%20WC1B%205AD&output=embed"
+                    ></iframe>
+                  </div>
+                </div>
+
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-2">
+                    <span class="mt-[2px] h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                    <div>
+                      <p class="font-medium text-slate-800">
+                        Hotel · Southampton Row
+                      </p>
+                      <p class="text-[0.7rem] text-slate-500">
+                        Punto base para guardar como “Casa” o “Favorito”.
+                      </p>
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="mt-[2px] h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                    <div>
+                      <p class="font-medium text-slate-800">
+                        Centro clásico · Westminster / Soho
+                      </p>
+                      <p class="text-[0.7rem] text-slate-500">
+                        Referencia para días de “clásicos” (Día 2).
+                      </p>
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="mt-[2px] h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                    <div>
+                      <p class="font-medium text-slate-800">
+                        Camden &amp; Regent&apos;s Canal
+                      </p>
+                      <p class="text-[0.7rem] text-slate-500">
+                        Ideal para marcar como zona de mercadillos y paseo junto al agua.
+                      </p>
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="mt-[2px] h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                    <div>
+                      <p class="font-medium text-slate-800">
+                        Notting Hill / Portobello Road
+                      </p>
+                      <p class="text-[0.7rem] text-slate-500">
+                        Zona bonita para fotos y paseo tranquilo en el Día 3.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+                <p class="pt-1 text-[0.7rem] text-slate-500">
+                  Sugerencia: crea una lista propia en Google Maps (“London Escape”) y
+                  guarda todos estos puntos con iconos personalizados.
+                </p>
+              </div>
+            </article>
+
+            <!-- Zonas clave / vibes -->
+            <article
+              class="flex flex-col rounded-2xl bg-white px-4 py-4 shadow-sm ring-1 ring-slate-100 sm:px-5 sm:py-5"
+            >
+              <header class="mb-3">
+                <p class="text-[0.7rem] font-medium uppercase tracking-[0.2em] text-slate-500">
+                  Zonas clave
+                </p>
+                <p class="mt-1 text-sm font-semibold text-slate-900">
+                  Vibes por barrio
+                </p>
+              </header>
+
+              <dl class="space-y-3 text-xs text-slate-600">
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Bloomsbury / Russell Square
+                  </dt>
+                  <dd class="text-[0.7rem] text-slate-500">
+                    Zona del hotel: residencial, tranquila, verde y bien conectada.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Southbank
+                  </dt>
+                  <dd class="text-[0.7rem] text-slate-500">
+                    Paseos junto al río, skyline, puentes y atardeceres muy fotogénicos.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Westminster &amp; alrededores
+                  </dt>
+                  <dd class="text-[0.7rem] text-slate-500">
+                    Zona de iconos: Big Ben, Parlamento, Abadía, parques.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Soho / Covent Garden
+                  </dt>
+                  <dd class="text-[0.7rem] text-slate-500">
+                    Tiendas, restaurantes, ambiente nocturno y cafés para hacer pausas.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Camden Town
+                  </dt>
+                  <dd class="text-[0.7rem] text-slate-500">
+                    Mercados alternativos, música, puestos de comida y canal.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-slate-800">
+                    Notting Hill
+                  </dt>
+                  <dd class="text-[0.7rem] text-slate-500">
+                    Calles color pastel, casitas icónicas y Portobello Market.
+                  </dd>
+                </div>
+              </dl>
+
+              <!-- Mini galería de imágenes (rellenar con fotos propias en /images) -->
+              <div class="mt-4">
+                <p class="mb-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-slate-500">
+                  Recuerdos visuales
+                </p>
+                <div class="grid grid-cols-3 gap-2">
+                  <figure class="overflow-hidden rounded-lg bg-slate-100">
+                    <img
+                      src="images/london-skyline-1.jpg"
+                      alt="Skyline de Londres junto al río"
+                      class="h-20 w-full object-cover"
+                    />
+                  </figure>
+                  <figure class="overflow-hidden rounded-lg bg-slate-100">
+                    <img
+                      src="images/camden-market-1.jpg"
+                      alt="Ambiente en Camden Market"
+                      class="h-20 w-full object-cover"
+                    />
+                  </figure>
+                  <figure class="overflow-hidden rounded-lg bg-slate-100">
+                    <img
+                      src="images/notting-hill-1.jpg"
+                      alt="Casas de colores en Notting Hill"
+                      class="h-20 w-full object-cover"
+                    />
+                  </figure>
+                </div>
+                <p class="mt-2 text-[0.7rem] text-slate-500">
+                  Puedes sustituir estos nombres de archivo por tus propias fotos
+                  en la carpeta <span class="font-medium text-slate-700">images</span>.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Nota al pie del itinerario -->
+        <section class="mt-auto pt-4 text-xs text-slate-400">
+          <p>
+            Todo es ajustable en función del clima, la energía y los antojos
+            del momento. Esta guía está pensada para inspirar, no para imponer.
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <!-- Script de cuenta regresiva + lógica de bloqueo -->
+    <script>
+      (function () {
+        const targetDate = new Date("2026-04-03T09:35:00");
+        const daysEl = document.getElementById("count-days");
+        const hoursEl = document.getElementById("count-hours");
+        const minutesEl = document.getElementById("count-minutes");
+        const secondsEl = document.getElementById("count-seconds");
+        const messageEl = document.getElementById("countdown-message");
+        const lockScreen = document.getElementById("lock-screen");
+        const app = document.getElementById("trip-app");
+        const secretButton = document.getElementById("secret-button");
+
+        let countdownInterval = null;
+        let unlocked = false;
+
+        function pad(value) {
+          return String(value).padStart(2, "0");
+        }
+
+        function updateCountdown() {
+          const now = new Date();
+          const diff = targetDate.getTime() - now.getTime();
+
+          if (diff <= 0) {
+            daysEl.textContent = "00";
+            hoursEl.textContent = "00";
+            minutesEl.textContent = "00";
+            secondsEl.textContent = "00";
+            messageEl.textContent =
+              "El viaje ha comenzado. Tu guía está lista.";
+
+            unlock(true);
+            return;
+          }
+
+          const totalSeconds = Math.floor(diff / 1000);
+          const days = Math.floor(totalSeconds / (60 * 60 * 24));
+          const hours = Math.floor(
+            (totalSeconds % (60 * 60 * 24)) / (60 * 60)
+          );
+          const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+          const seconds = totalSeconds % 60;
+
+          daysEl.textContent = pad(days);
+          hoursEl.textContent = pad(hours);
+          minutesEl.textContent = pad(minutes);
+          secondsEl.textContent = pad(seconds);
+        }
+
+        function unlock(fromCountdown) {
+          if (unlocked) return;
+          unlocked = true;
+
+          if (countdownInterval) {
+            clearInterval(countdownInterval);
+          }
+
+          // Mostrar contenido principal y ocultar pantalla de bloqueo
+          lockScreen.classList.add("hidden");
+          app.classList.remove("hidden");
+
+          // Reactivar scroll
+          document.body.classList.remove("overflow-hidden");
+
+          if (!fromCountdown && messageEl) {
+            messageEl.textContent =
+              "Modo desarrollador: has saltado la cuenta regresiva.";
+          }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+          const now = new Date();
+
+          // Si la fecha actual ya es posterior al 3 de abril de 2026 09:35, desbloquear directamente
+          if (now.getTime() >= targetDate.getTime()) {
+            unlock(true);
+            return;
+          }
+
+          updateCountdown();
+          countdownInterval = setInterval(updateCountdown, 1000);
+        });
+
+        // Atajo de teclado secreto: Ctrl + Alt + L
+        window.addEventListener("keydown", function (event) {
+          if (event.ctrlKey && event.altKey && event.key.toLowerCase() === "l") {
+            unlock(false);
+          }
+        });
+
+        // Botón invisible en la esquina superior derecha
+        if (secretButton) {
+          secretButton.addEventListener("click", function () {
+            unlock(false);
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
+
