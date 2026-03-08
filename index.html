@@ -59,7 +59,18 @@
     <!-- Pantalla de bloqueo / Hype Screen -->
     <section
       id="lock-screen"
-      class="fixed inset-0 flex flex-col justify-between bg-slate-50 px-6 py-8"
+      class="fixed inset-0 flex flex-col justify-between px-6 py-8"
+      style="
+        background-image: linear-gradient(
+            to bottom,
+            rgba(15, 23, 42, 0.85),
+            rgba(15, 23, 42, 0.6)
+          ),
+          url('images/Skyview.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      "
     >
       <!-- Botón secreto invisible (esquina superior derecha) -->
       <button
@@ -81,24 +92,27 @@
       </header>
 
       <!-- Contenido central -->
-      <div class="flex flex-1 items-center justify-center">
-        <div class="max-w-md text-center">
-          <p class="mb-4 text-xs font-medium uppercase tracking-[0.25em] text-slate-500">
-            guía en construcción
-          </p>
-          <h1 class="mb-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-            London Escape
-          </h1>
-          <p class="mb-8 text-sm text-slate-600 sm:text-base">
-            Alejandro &amp; Ivonne están a punto de despegar.
-            Contando los segundos para aterrizar en Londres.
-          </p>
-
-          <!-- Contador -->
+      <div class="flex flex-1 items-center justify-center px-1">
+        <div class="w-full max-w-md">
           <div
-            class="mx-auto flex max-w-sm flex-wrap items-stretch justify-center gap-3"
-            aria-label="Cuenta regresiva hasta el viaje"
+            class="rounded-2xl bg-white/95 px-5 py-6 text-center shadow-sm ring-1 ring-slate-100 backdrop-blur-sm sm:px-7 sm:py-7"
           >
+            <p class="mb-4 text-xs font-medium uppercase tracking-[0.25em] text-slate-500">
+              guía en construcción
+            </p>
+            <h1 class="mb-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+              London Escape
+            </h1>
+            <p class="mb-8 text-sm text-slate-600 sm:text-base">
+              Alejandro &amp; Ivonne están a punto de despegar.
+              Contando los segundos para aterrizar en Londres.
+            </p>
+
+            <!-- Contador -->
+            <div
+              class="mx-auto flex max-w-sm flex-wrap items-stretch justify-center gap-3"
+              aria-label="Cuenta regresiva hasta el viaje"
+            >
             <div
               class="flex h-24 w-20 flex-col items-center justify-center rounded-2xl bg-white/90 px-3 shadow-sm ring-1 ring-slate-100"
             >
@@ -138,26 +152,27 @@
               </span>
             </div>
 
-            <div
-              class="flex h-24 w-20 flex-col items-center justify-center rounded-2xl bg-white/90 px-3 shadow-sm ring-1 ring-slate-100"
-            >
-              <span
-                id="count-seconds"
-                class="text-2xl font-semibold tracking-tight text-slate-900"
-                >0</span
+              <div
+                class="flex h-24 w-20 flex-col items-center justify-center rounded-2xl bg-white/90 px-3 shadow-sm ring-1 ring-slate-100"
               >
-              <span class="mt-1 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-slate-500">
-                segundos
-              </span>
+                <span
+                  id="count-seconds"
+                  class="text-2xl font-semibold tracking-tight text-slate-900"
+                  >0</span
+                >
+                <span class="mt-1 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-slate-500">
+                  segundos
+                </span>
+              </div>
             </div>
-          </div>
 
-          <p
-            id="countdown-message"
-            class="mt-6 text-xs text-slate-500"
-          >
-            Desbloquearemos tu guía cuando llegue el momento del despegue.
-          </p>
+            <p
+              id="countdown-message"
+              class="mt-6 text-xs text-slate-500"
+            >
+              Desbloquearemos tu guía cuando llegue el momento del despegue.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -173,7 +188,19 @@
     <!-- Contenido principal (inicialmente oculto) -->
     <main
       id="trip-app"
-      class="min-h-screen bg-slate-50 text-slate-900 hidden"
+      class="min-h-screen text-slate-900 hidden"
+      style="
+        background-image: linear-gradient(
+            to bottom,
+            rgba(15, 23, 42, 0.35),
+            rgba(15, 23, 42, 0.15)
+          ),
+          url('images/Train.png');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+      "
     >
       <div class="mx-auto flex min-h-screen max-w-3xl flex-col px-5 py-8 sm:py-12">
         <!-- Hero -->
