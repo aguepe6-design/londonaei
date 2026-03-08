@@ -1,0 +1,7 @@
+[build]
+  command = ""          # Sin build: sitio estático puro
+  publish = "."         # Publicar directamente desde la raíz del repo
+
+  [build.environment]
+    NODE_VERSION = "18" # Solo por compatibilidad, aunque no se usa build
+

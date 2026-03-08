@@ -97,7 +97,18 @@
           <div
             class="rounded-2xl bg-white/95 px-5 py-6 text-center shadow-sm ring-1 ring-slate-100 backdrop-blur-sm sm:px-7 sm:py-7"
           >
-            <p class="mb-4 text-xs font-medium uppercase tracking-[0.25em] text-slate-500">
+            <div class="mb-5 flex items-center justify-center">
+              <div
+                class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-slate-50 shadow-sm ring-1 ring-slate-100 sm:h-20 sm:w-20"
+              >
+                <img
+                  src="images/Time.png"
+                  alt="Icono de tiempo para la cuenta regresiva"
+                  class="h-10 w-10 object-contain sm:h-12 sm:w-12"
+                />
+              </div>
+            </div>
+            <p class="mb-3 text-xs font-medium uppercase tracking-[0.25em] text-slate-500">
               guía en construcción
             </p>
             <h1 class="mb-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
@@ -110,57 +121,57 @@
 
             <!-- Contador -->
             <div
-              class="mx-auto flex max-w-sm flex-wrap items-stretch justify-center gap-3"
+              class="mx-auto flex max-w-xs flex-wrap items-stretch justify-center gap-2 sm:max-w-sm sm:gap-3"
               aria-label="Cuenta regresiva hasta el viaje"
             >
-            <div
-              class="flex h-24 w-20 flex-col items-center justify-center rounded-2xl bg-white/90 px-3 shadow-sm ring-1 ring-slate-100"
-            >
-              <span
-                id="count-days"
-                class="text-2xl font-semibold tracking-tight text-slate-900"
-                >0</span
+              <div
+                class="flex h-20 w-16 flex-col items-center justify-center rounded-2xl bg-white/90 px-2 shadow-sm ring-1 ring-slate-100 sm:h-24 sm:w-20 sm:px-3"
               >
-              <span class="mt-1 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-slate-500">
-                días
-              </span>
-            </div>
-
-            <div
-              class="flex h-24 w-20 flex-col items-center justify-center rounded-2xl bg-white/90 px-3 shadow-sm ring-1 ring-slate-100"
-            >
-              <span
-                id="count-hours"
-                class="text-2xl font-semibold tracking-tight text-slate-900"
-                >0</span
-              >
-              <span class="mt-1 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-slate-500">
-                horas
-              </span>
-            </div>
-
-            <div
-              class="flex h-24 w-20 flex-col items-center justify-center rounded-2xl bg-white/90 px-3 shadow-sm ring-1 ring-slate-100"
-            >
-              <span
-                id="count-minutes"
-                class="text-2xl font-semibold tracking-tight text-slate-900"
-                >0</span
-              >
-              <span class="mt-1 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-slate-500">
-                minutos
-              </span>
-            </div>
+                <span
+                  id="count-days"
+                  class="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl"
+                  >0</span
+                >
+                <span class="mt-1 text-[0.6rem] font-medium uppercase tracking-[0.18em] text-slate-500 sm:text-[0.65rem]">
+                  días
+                </span>
+              </div>
 
               <div
-                class="flex h-24 w-20 flex-col items-center justify-center rounded-2xl bg-white/90 px-3 shadow-sm ring-1 ring-slate-100"
+                class="flex h-20 w-16 flex-col items-center justify-center rounded-2xl bg-white/90 px-2 shadow-sm ring-1 ring-slate-100 sm:h-24 sm:w-20 sm:px-3"
+              >
+                <span
+                  id="count-hours"
+                  class="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl"
+                  >0</span
+                >
+                <span class="mt-1 text-[0.6rem] font-medium uppercase tracking-[0.18em] text-slate-500 sm:text-[0.65rem]">
+                  horas
+                </span>
+              </div>
+
+              <div
+                class="flex h-20 w-16 flex-col items-center justify-center rounded-2xl bg-white/90 px-2 shadow-sm ring-1 ring-slate-100 sm:h-24 sm:w-20 sm:px-3"
+              >
+                <span
+                  id="count-minutes"
+                  class="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl"
+                  >0</span
+                >
+                <span class="mt-1 text-[0.6rem] font-medium uppercase tracking-[0.18em] text-slate-500 sm:text-[0.65rem]">
+                  minutos
+                </span>
+              </div>
+
+              <div
+                class="flex h-20 w-16 flex-col items-center justify-center rounded-2xl bg-white/90 px-2 shadow-sm ring-1 ring-slate-100 sm:h-24 sm:w-20 sm:px-3"
               >
                 <span
                   id="count-seconds"
-                  class="text-2xl font-semibold tracking-tight text-slate-900"
+                  class="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl"
                   >0</span
                 >
-                <span class="mt-1 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-slate-500">
+                <span class="mt-1 text-[0.6rem] font-medium uppercase tracking-[0.18em] text-slate-500 sm:text-[0.65rem]">
                   segundos
                 </span>
               </div>
@@ -247,7 +258,23 @@
               <span
                 class="rounded-full bg-slate-900 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-slate-50"
               >
-                BCN · LTN
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Barcelona-El+Prat+Airport"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="underline-offset-2 hover:underline"
+                >
+                  BCN
+                </a>
+                ·
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=London+Luton+Airport"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="underline-offset-2 hover:underline"
+                >
+                  LTN
+                </a>
               </span>
             </header>
 
@@ -265,7 +292,14 @@
                   <div>
                     <p class="text-xs text-slate-500">Salida</p>
                     <p class="text-lg font-semibold text-slate-900">
-                      BCN
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Barcelona-El+Prat+Airport"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        BCN
+                      </a>
                       <span class="ml-1 text-xs font-medium text-slate-500">
                         (09:35)
                       </span>
@@ -283,7 +317,14 @@
                   <div class="text-right">
                     <p class="text-xs text-slate-500">Llegada</p>
                     <p class="text-lg font-semibold text-slate-900">
-                      LTN
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=London+Luton+Airport"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        LTN
+                      </a>
                       <span class="ml-1 text-xs font-medium text-slate-500">
                         (11:00)
                       </span>
@@ -314,7 +355,14 @@
                   <div>
                     <p class="text-xs text-slate-500">Salida</p>
                     <p class="text-lg font-semibold text-slate-900">
-                      LTN
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=London+Luton+Airport"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        LTN
+                      </a>
                       <span class="ml-1 text-xs font-medium text-slate-500">
                         (13:00)
                       </span>
@@ -332,7 +380,14 @@
                   <div class="text-right">
                     <p class="text-xs text-slate-500">Llegada</p>
                     <p class="text-lg font-semibold text-slate-900">
-                      BCN
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Barcelona-El+Prat+Airport"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        BCN
+                      </a>
                       <span class="ml-1 text-xs font-medium text-slate-500">
                         (16:10)
                       </span>
@@ -380,9 +435,14 @@
                 </p>
                 <p class="mt-1 text-slate-800">
                   Hotel en
-                  <span class="font-medium">
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=126+Southampton+Row+Camden+London+WC1B+5AD"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-medium hover:underline underline-offset-2"
+                  >
                     126 Southampton Row, Camden, Londres, WC1B 5AD
-                  </span>
+                  </a>
                   .
                 </p>
               </div>
@@ -464,7 +524,25 @@
                   </dt>
                   <dd>
                     Llegar al hotel, dejar maletas y paseo suave por
-                    <span class="text-slate-800">Russell Square / Bloomsbury</span>.
+                    <span class="text-slate-800">
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Russell+Square+London"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        Russell Square
+                      </a>
+                      /
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Bloomsbury+London"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        Bloomsbury
+                      </a>
+                    </span>.
                   </dd>
                 </div>
                 <div>
@@ -473,7 +551,16 @@
                   </dt>
                   <dd>
                     Paseo por el Támesis (zona
-                    <span class="text-slate-800">Southbank</span>) si hay energía.
+                    <span class="text-slate-800">
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=South+Bank+London"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        Southbank
+                      </a>
+                    </span>) si hay energía.
                   </dd>
                 </div>
                 <div>
@@ -513,7 +600,30 @@
                   <dd>
                     Westminster:
                     <span class="text-slate-800">
-                      Big Ben, Parlamento, Abadía de Westminster
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Big+Ben+London"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        Big Ben
+                      </a>,&nbsp;
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Houses+of+Parliament+London"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        Parlamento
+                      </a>,&nbsp;
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Westminster+Abbey+London"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        Abadía de Westminster
+                      </a>
                     </span>.
                   </dd>
                 </div>
@@ -523,7 +633,17 @@
                   </dt>
                   <dd>
                     Paseo por
-                    <span class="text-slate-800">St James&apos;s Park</span> y alrededores.
+                    <span class="text-slate-800">
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=St+James%27s+Park+London"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        St James&apos;s Park
+                      </a>
+                    </span>
+                    y alrededores.
                   </dd>
                 </div>
                 <div>
@@ -531,8 +651,26 @@
                     Tarde
                   </dt>
                   <dd>
-                    Trafalgar Square y
-                    <span class="text-slate-800">Covent Garden</span> (tiendas, café).
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Trafalgar+Square+London"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="hover:underline underline-offset-2"
+                    >
+                      Trafalgar Square
+                    </a>
+                    y
+                    <span class="text-slate-800">
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Covent+Garden+London"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        Covent Garden
+                      </a>
+                    </span>
+                    (tiendas, café).
                   </dd>
                 </div>
                 <div>
@@ -540,7 +678,25 @@
                     Noche
                   </dt>
                   <dd>
-                    Opcional Soho / China Town para cenar.
+                    Opcional
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Soho+London"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="hover:underline underline-offset-2"
+                    >
+                      Soho
+                    </a>
+                    /
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Chinatown+London"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="hover:underline underline-offset-2"
+                    >
+                      China Town
+                    </a>
+                    para cenar.
                   </dd>
                 </div>
               </dl>
@@ -570,7 +726,17 @@
                     Mañana
                   </dt>
                   <dd>
-                    <span class="text-slate-800">Camden Town</span> y sus mercados.
+                    <span class="text-slate-800">
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Camden+Town+London"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        Camden Town
+                      </a>
+                    </span>
+                    y sus mercados.
                   </dd>
                 </div>
                 <div>
@@ -579,7 +745,17 @@
                   </dt>
                   <dd>
                     Paseo por
-                    <span class="text-slate-800">Regent&apos;s Canal</span> si el tiempo acompaña.
+                    <span class="text-slate-800">
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Regent%27s+Canal+London"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        Regent&apos;s Canal
+                      </a>
+                    </span>
+                    si el tiempo acompaña.
                   </dd>
                 </div>
                 <div>
@@ -588,7 +764,25 @@
                   </dt>
                   <dd>
                     Zona
-                    <span class="text-slate-800">Notting Hill / Portobello</span>
+                    <span class="text-slate-800">
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Notting+Hill+London"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        Notting Hill
+                      </a>
+                      /
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Portobello+Road+London"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:underline underline-offset-2"
+                      >
+                        Portobello
+                      </a>
+                    </span>
                     o alternativa en función del clima.
                   </dd>
                 </div>
@@ -703,7 +897,14 @@
                     <span class="mt-[2px] h-1.5 w-1.5 rounded-full bg-slate-400"></span>
                     <div>
                       <p class="font-medium text-slate-800">
-                        Hotel · Southampton Row
+                        <a
+                          href="https://www.google.com/maps/search/?api=1&query=126+Southampton+Row+Camden+London+WC1B+5AD"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="hover:underline underline-offset-2"
+                        >
+                          Hotel · Southampton Row
+                        </a>
                       </p>
                       <p class="text-[0.7rem] text-slate-500">
                         Punto base para guardar como “Casa” o “Favorito”.
@@ -714,7 +915,23 @@
                     <span class="mt-[2px] h-1.5 w-1.5 rounded-full bg-slate-400"></span>
                     <div>
                       <p class="font-medium text-slate-800">
-                        Centro clásico · Westminster / Soho
+                        <a
+                          href="https://www.google.com/maps/search/?api=1&query=Westminster+London"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="hover:underline underline-offset-2"
+                        >
+                          Centro clásico · Westminster
+                        </a>
+                        /
+                        <a
+                          href="https://www.google.com/maps/search/?api=1&query=Soho+London"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="hover:underline underline-offset-2"
+                        >
+                          Soho
+                        </a>
                       </p>
                       <p class="text-[0.7rem] text-slate-500">
                         Referencia para días de “clásicos” (Día 2).
@@ -725,7 +942,23 @@
                     <span class="mt-[2px] h-1.5 w-1.5 rounded-full bg-slate-400"></span>
                     <div>
                       <p class="font-medium text-slate-800">
-                        Camden &amp; Regent&apos;s Canal
+                        <a
+                          href="https://www.google.com/maps/search/?api=1&query=Camden+Town+London"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="hover:underline underline-offset-2"
+                        >
+                          Camden
+                        </a>
+                        &amp;
+                        <a
+                          href="https://www.google.com/maps/search/?api=1&query=Regent%27s+Canal+London"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="hover:underline underline-offset-2"
+                        >
+                          Regent&apos;s Canal
+                        </a>
                       </p>
                       <p class="text-[0.7rem] text-slate-500">
                         Ideal para marcar como zona de mercadillos y paseo junto al agua.
@@ -736,7 +969,23 @@
                     <span class="mt-[2px] h-1.5 w-1.5 rounded-full bg-slate-400"></span>
                     <div>
                       <p class="font-medium text-slate-800">
-                        Notting Hill / Portobello Road
+                        <a
+                          href="https://www.google.com/maps/search/?api=1&query=Notting+Hill+London"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="hover:underline underline-offset-2"
+                        >
+                          Notting Hill
+                        </a>
+                        /
+                        <a
+                          href="https://www.google.com/maps/search/?api=1&query=Portobello+Road+London"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="hover:underline underline-offset-2"
+                        >
+                          Portobello Road
+                        </a>
                       </p>
                       <p class="text-[0.7rem] text-slate-500">
                         Zona bonita para fotos y paseo tranquilo en el Día 3.
@@ -767,7 +1016,23 @@
               <dl class="space-y-3 text-xs text-slate-600">
                 <div>
                   <dt class="font-medium text-slate-800">
-                    Bloomsbury / Russell Square
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Bloomsbury+London"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="hover:underline underline-offset-2"
+                    >
+                      Bloomsbury
+                    </a>
+                    /
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Russell+Square+London"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="hover:underline underline-offset-2"
+                    >
+                      Russell Square
+                    </a>
                   </dt>
                   <dd class="text-[0.7rem] text-slate-500">
                     Zona del hotel: residencial, tranquila, verde y bien conectada.
@@ -775,7 +1040,14 @@
                 </div>
                 <div>
                   <dt class="font-medium text-slate-800">
-                    Southbank
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=South+Bank+London"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="hover:underline underline-offset-2"
+                    >
+                      Southbank
+                    </a>
                   </dt>
                   <dd class="text-[0.7rem] text-slate-500">
                     Paseos junto al río, skyline, puentes y atardeceres muy fotogénicos.
@@ -783,7 +1055,15 @@
                 </div>
                 <div>
                   <dt class="font-medium text-slate-800">
-                    Westminster &amp; alrededores
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Westminster+London"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="hover:underline underline-offset-2"
+                    >
+                      Westminster
+                    </a>
+                    &amp; alrededores
                   </dt>
                   <dd class="text-[0.7rem] text-slate-500">
                     Zona de iconos: Big Ben, Parlamento, Abadía, parques.
@@ -791,7 +1071,23 @@
                 </div>
                 <div>
                   <dt class="font-medium text-slate-800">
-                    Soho / Covent Garden
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Soho+London"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="hover:underline underline-offset-2"
+                    >
+                      Soho
+                    </a>
+                    /
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Covent+Garden+London"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="hover:underline underline-offset-2"
+                    >
+                      Covent Garden
+                    </a>
                   </dt>
                   <dd class="text-[0.7rem] text-slate-500">
                     Tiendas, restaurantes, ambiente nocturno y cafés para hacer pausas.
@@ -799,7 +1095,14 @@
                 </div>
                 <div>
                   <dt class="font-medium text-slate-800">
-                    Camden Town
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Camden+Town+London"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="hover:underline underline-offset-2"
+                    >
+                      Camden Town
+                    </a>
                   </dt>
                   <dd class="text-[0.7rem] text-slate-500">
                     Mercados alternativos, música, puestos de comida y canal.
@@ -807,7 +1110,14 @@
                 </div>
                 <div>
                   <dt class="font-medium text-slate-800">
-                    Notting Hill
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Notting+Hill+London"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="hover:underline underline-offset-2"
+                    >
+                      Notting Hill
+                    </a>
                   </dt>
                   <dd class="text-[0.7rem] text-slate-500">
                     Calles color pastel, casitas icónicas y Portobello Market.
