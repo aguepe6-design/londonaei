@@ -240,6 +240,50 @@
           </div>
         </section>
 
+        <!-- Tiempo en Londres (Open-Meteo) -->
+        <section class="mb-8 sm:mb-10" id="weather-section" aria-live="polite">
+          <article
+            class="rounded-2xl bg-white px-5 py-6 shadow-sm ring-1 ring-slate-100 sm:px-7"
+          >
+            <header class="mb-3 flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-600">
+                  Tiempo en Londres
+                </h3>
+                <p class="mt-1 text-xs text-slate-500">
+                  Pronóstico para el viaje (3–6 abr) o próximos días si aún no está disponible.
+                </p>
+              </div>
+              <a
+                href="https://open-meteo.com/en/forecast?latitude=51.5072&longitude=-0.1276&hourly=temperature_2m,precipitation_probability,weathercode&timezone=Europe%2FLondon"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="shrink-0 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[0.65rem] font-medium text-slate-700 hover:bg-slate-100"
+              >
+                Abrir en Open-Meteo
+              </a>
+            </header>
+            <p id="weather-status" class="text-xs text-slate-600">
+              Cargando pronóstico…
+            </p>
+            <div
+              id="weather-days"
+              class="mt-3 grid gap-2 sm:grid-cols-2"
+            ></div>
+            <p class="mt-3 text-[0.65rem] leading-relaxed text-slate-400">
+              Datos de
+              <a
+                href="https://open-meteo.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-slate-600 underline-offset-2 hover:underline"
+                >Open-Meteo</a
+              >
+              (sin API key). El pronóstico a varias semanas es orientativo; revisa de nuevo cerca de la fecha.
+            </p>
+          </article>
+        </section>
+
         <!-- Grid de tarjetas -->
         <section class="mb-8 grid gap-5 sm:mb-10">
           <!-- Tarjeta de Vuelos -->
@@ -1255,6 +1299,155 @@
             unlock(false);
           });
         }
+      })();
+    </script>
+
+    <!-- Pronóstico Londres (Open-Meteo, CORS abierto) -->
+    <script>
+      (function () {
+        var TRIP_START = "2026-04-03";
+        var TRIP_END = "2026-04-06";
+        var LAT = 51.5072;
+        var LON = -0.1276;
+
+        function wmoToEs(code) {
+          if (code === 0) return "Despejado";
+          if (code === 1 || code === 2) return "Poco nuboso";
+          if (code === 3) return "Nublado";
+          if (code === 45 || code === 48) return "Niebla";
+          if (code >= 51 && code <= 57) return "Llovizna";
+          if (code >= 61 && code <= 67) return "Lluvia";
+          if (code >= 71 && code <= 77) return "Nieve";
+          if (code >= 80 && code <= 82) return "Chubascos";
+          if (code >= 85 && code <= 86) return "Chubascos de nieve";
+          if (code >= 95 && code <= 99) return "Tormenta";
+          return "Variado";
+        }
+
+        function formatDayLabel(isoDate) {
+          var d = new Date(isoDate + "T12:00:00");
+          return d.toLocaleDateString("es-ES", {
+            weekday: "short",
+            day: "numeric",
+            month: "short",
+          });
+        }
+
+        function renderCards(container, data, indices) {
+          container.innerHTML = "";
+          var times = data.daily.time;
+          var tmax = data.daily.temperature_2m_max;
+          var tmin = data.daily.temperature_2m_min;
+          var codes = data.daily.weathercode;
+          var precip = data.daily.precipitation_probability_max;
+
+          indices.forEach(function (i) {
+            var el = document.createElement("div");
+            el.className =
+              "flex items-center justify-between gap-3 rounded-xl border border-slate-100 bg-slate-50/80 px-3 py-2.5";
+            var p =
+              precip && precip[i] != null && precip[i] !== ""
+                ? Math.round(precip[i]) + "% prob. lluvia"
+                : "";
+            el.innerHTML =
+              '<div class="min-w-0">' +
+              '<p class="text-xs font-semibold capitalize text-slate-900">' +
+              formatDayLabel(times[i]) +
+              "</p>" +
+              '<p class="mt-0.5 text-[0.7rem] text-slate-600">' +
+              wmoToEs(codes[i]) +
+              "</p>" +
+              "</div>" +
+              '<div class="shrink-0 text-right">' +
+              '<p class="text-sm font-semibold tabular-nums text-slate-900">' +
+              Math.round(tmax[i]) +
+              "° / " +
+              Math.round(tmin[i]) +
+              "°</p>" +
+              (p
+                ? '<p class="text-[0.65rem] text-slate-500">' + p + "</p>"
+                : "") +
+              "</div>";
+            container.appendChild(el);
+          });
+        }
+
+        function tripIndices(times) {
+          var out = [];
+          times.forEach(function (t, i) {
+            if (t >= TRIP_START && t <= TRIP_END) out.push(i);
+          });
+          return out;
+        }
+
+        async function loadLondonWeather() {
+          var statusEl = document.getElementById("weather-status");
+          var container = document.getElementById("weather-days");
+          if (!statusEl || !container) return;
+
+          try {
+            var urlTrip =
+              "https://api.open-meteo.com/v1/forecast?latitude=" +
+              LAT +
+              "&longitude=" +
+              LON +
+              "&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max" +
+              "&timezone=Europe%2FLondon&start_date=" +
+              TRIP_START +
+              "&end_date=" +
+              TRIP_END;
+
+            var res = await fetch(urlTrip);
+            var data = await res.json();
+
+            if (data.daily && data.daily.time && data.daily.time.length > 0) {
+              statusEl.textContent =
+                "Pronóstico para Londres durante tu viaje (3–6 abr 2026):";
+              renderCards(
+                container,
+                data,
+                data.daily.time.map(function (_, i) {
+                  return i;
+                })
+              );
+              return;
+            }
+
+            var url16 =
+              "https://api.open-meteo.com/v1/forecast?latitude=" +
+              LAT +
+              "&longitude=" +
+              LON +
+              "&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max" +
+              "&timezone=Europe%2FLondon&forecast_days=16";
+
+            res = await fetch(url16);
+            data = await res.json();
+            if (!data.daily || !data.daily.time || data.daily.time.length === 0) {
+              throw new Error("Sin datos");
+            }
+
+            var idx = tripIndices(data.daily.time);
+            if (idx.length > 0) {
+              statusEl.textContent =
+                "Pronóstico para las fechas de tu viaje en Londres:";
+              renderCards(container, data, idx);
+            } else {
+              var n = Math.min(4, data.daily.time.length);
+              var fallback = [];
+              for (var j = 0; j < n; j++) fallback.push(j);
+              statusEl.textContent =
+                "Aún no hay pronóstico para el 3–6 abr en la ventana actual. Próximos días en el centro de Londres:";
+              renderCards(container, data, fallback);
+            }
+          } catch (e) {
+            statusEl.textContent =
+              "No se pudo cargar el tiempo. Comprueba la conexión o abre Open-Meteo con el enlace de arriba.";
+            container.innerHTML = "";
+          }
+        }
+
+        document.addEventListener("DOMContentLoaded", loadLondonWeather);
       })();
     </script>
   </body>
