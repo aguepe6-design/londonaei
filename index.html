@@ -533,6 +533,91 @@
             </div>
           </article>
         </section>
+
+        <!-- Reservas & Documentos -->
+        <section class="mb-8 sm:mb-10 space-y-4" id="reservas-section">
+          <header>
+            <h3 class="text-xs font-semibold uppercase tracking-[0.25em] text-slate-600">
+              Reservas &amp; documentos
+            </h3>
+            <p class="mt-1 text-xs text-slate-500">
+              Sube tus PDFs a la carpeta
+              <code class="rounded bg-slate-100 px-1 py-0.5 text-slate-600">reservas/</code>
+              del repositorio y aparecerán aquí listos para abrir.
+            </p>
+          </header>
+
+          <div class="grid gap-3 sm:grid-cols-2">
+
+            <!-- Vuelo Ida -->
+            <a id="res-vuelo-ida" href="reservas/vuelo-ida.pdf" target="_blank" rel="noopener noreferrer"
+              class="reserva-card flex items-center gap-3 rounded-2xl bg-white px-4 py-3.5 shadow-sm ring-1 ring-slate-100 hover:ring-slate-300 transition-all">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-lg">✈️</span>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-medium text-slate-900">Vuelo ida</p>
+                <p class="text-xs text-slate-500">BCN → LTN · W9 5362 · Wizz Air</p>
+              </div>
+              <span class="res-badge shrink-0 rounded-full px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide">—</span>
+            </a>
+
+            <!-- Vuelo Vuelta -->
+            <a id="res-vuelo-vuelta" href="reservas/vuelo-vuelta.pdf" target="_blank" rel="noopener noreferrer"
+              class="reserva-card flex items-center gap-3 rounded-2xl bg-white px-4 py-3.5 shadow-sm ring-1 ring-slate-100 hover:ring-slate-300 transition-all">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-lg">✈️</span>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-medium text-slate-900">Vuelo vuelta</p>
+                <p class="text-xs text-slate-500">LTN → BCN · FR 7807 · Ryanair</p>
+              </div>
+              <span class="res-badge shrink-0 rounded-full px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide">—</span>
+            </a>
+
+            <!-- Hotel -->
+            <a id="res-hotel" href="reservas/hotel.pdf" target="_blank" rel="noopener noreferrer"
+              class="reserva-card flex items-center gap-3 rounded-2xl bg-white px-4 py-3.5 shadow-sm ring-1 ring-slate-100 hover:ring-slate-300 transition-all">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-lg">🏨</span>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-medium text-slate-900">Hotel</p>
+                <p class="text-xs text-slate-500">Thistle London Bloomsbury Park · 3 noches</p>
+              </div>
+              <span class="res-badge shrink-0 rounded-full px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide">—</span>
+            </a>
+
+            <!-- Tren -->
+            <a id="res-tren" href="reservas/tren.pdf" target="_blank" rel="noopener noreferrer"
+              class="reserva-card flex items-center gap-3 rounded-2xl bg-white px-4 py-3.5 shadow-sm ring-1 ring-slate-100 hover:ring-slate-300 transition-all">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-lg">🚆</span>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-medium text-slate-900">Tren Luton ↔ Londres</p>
+                <p class="text-xs text-slate-500">Thameslink · Luton Airport Parkway → St Pancras</p>
+              </div>
+              <span class="res-badge shrink-0 rounded-full px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide">—</span>
+            </a>
+
+            <!-- Sky Garden -->
+            <a id="res-sky-garden" href="reservas/sky-garden.pdf" target="_blank" rel="noopener noreferrer"
+              class="reserva-card flex items-center gap-3 rounded-2xl bg-white px-4 py-3.5 shadow-sm ring-1 ring-slate-100 hover:ring-slate-300 transition-all">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-lg">🌿</span>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-medium text-slate-900">Sky Garden</p>
+                <p class="text-xs text-slate-500">Cóctel despedida · Dom 5 abr · 21:30</p>
+              </div>
+              <span class="res-badge shrink-0 rounded-full px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide">—</span>
+            </a>
+
+            <!-- Restaurantes -->
+            <a id="res-restaurantes" href="reservas/restaurantes.pdf" target="_blank" rel="noopener noreferrer"
+              class="reserva-card flex items-center gap-3 rounded-2xl bg-white px-4 py-3.5 shadow-sm ring-1 ring-slate-100 hover:ring-slate-300 transition-all">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-lg">🍽️</span>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-medium text-slate-900">Restaurantes</p>
+                <p class="text-xs text-slate-500">Orient London · Duck &amp; Waffle · The Vault · y más</p>
+              </div>
+              <span class="res-badge shrink-0 rounded-full px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide">—</span>
+            </a>
+
+          </div>
+        </section>
+
         <!-- Itinerario real (fuente: Itinerario_Londres_Abril2026.csv) -->
         <section class="mb-10 space-y-4" id="itinerario">
           <header class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
@@ -1479,6 +1564,51 @@
         }
 
         document.addEventListener("DOMContentLoaded", loadLondonWeather);
+      })();
+    </script>
+
+    <!-- Reservas: comprueba qué PDFs existen y actualiza badges -->
+    <script>
+      (function () {
+        var reservas = [
+          { id: "res-vuelo-ida",     file: "reservas/vuelo-ida.pdf" },
+          { id: "res-vuelo-vuelta",  file: "reservas/vuelo-vuelta.pdf" },
+          { id: "res-hotel",         file: "reservas/hotel.pdf" },
+          { id: "res-tren",          file: "reservas/tren.pdf" },
+          { id: "res-sky-garden",    file: "reservas/sky-garden.pdf" },
+          { id: "res-restaurantes",  file: "reservas/restaurantes.pdf" },
+        ];
+
+        async function checkReservas() {
+          for (var r of reservas) {
+            var el = document.getElementById(r.id);
+            if (!el) continue;
+            var badge = el.querySelector(".res-badge");
+            try {
+              var res = await fetch(r.file, { method: "HEAD" });
+              if (res.ok) {
+                el.classList.add("ring-emerald-200", "hover:ring-emerald-400");
+                el.classList.remove("ring-slate-100", "hover:ring-slate-300");
+                if (badge) {
+                  badge.textContent = "PDF";
+                  badge.classList.add("bg-emerald-50", "text-emerald-700");
+                  badge.classList.remove("text-slate-400");
+                }
+              } else {
+                throw new Error("not found");
+              }
+            } catch (_) {
+              el.removeAttribute("href");
+              el.style.cursor = "default";
+              if (badge) {
+                badge.textContent = "Pendiente";
+                badge.classList.add("bg-slate-100", "text-slate-400");
+              }
+            }
+          }
+        }
+
+        document.addEventListener("DOMContentLoaded", checkReservas);
       })();
     </script>
 
